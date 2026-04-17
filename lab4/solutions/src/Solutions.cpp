@@ -30,7 +30,31 @@ void task1() {
     cout << "В массиве есть нет пары соседних одинаковых элементов \n";
 }
 
-void task2() {}
+void task2() {
+    cout << "Найти наибольший отрицательный элемент одномерного массива и удалить его,"
+            " сдвинув оставшиеся элементы к началу массива."
+            "Если в массиве несколько элементов имеют наибольшее отрицательное значение, "
+            "удалить их все. Массив, все элементы которого отрицательны и равны между собой,"
+            " признается некорректным. \n";
+    int N;
+    cout << "Введите количество элементов в массиве" << endl;
+    cin >> N;
+    auto array = newOneDimensionArray(N);
+    fillOneDimensionArrayWithNumbers(array, N, -100, 100);
+    int maxNegative = findMaxNegativeNumber(array, N);
+    cout << "Массив до удаления элементов";
+    printOneDimensionArray(array, N);
+    if (maxNegative < 0) {
+        cout << "Максимальный отрицательный элемент в массиве" << maxNegative <<endl;
+        deleteElementFromArray(array, N, maxNegative);
+        cout << "Массив после удаления элементов";
+        printOneDimensionArray(array, N);
+    }
+    else {
+        cout << "В массиве нет отрицательных чисел";
+        printOneDimensionArray(array, N);
+    }
+}
 
 
 void task3() {
