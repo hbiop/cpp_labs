@@ -63,12 +63,32 @@ int findMaxNegativeNumber(int *array, int N) {
     return maxNegative;
 }
 
-void deleteElementFromArray(int *array, int N, int element) {
+void deleteElementFromArray(int* &array, int &N, int element) {
+    int* tempArray = new int[N];
+    int newSize = 0;
+
     for (int i = 0; i < N; i++) {
-        if (array[i] == element) {
-            for (int j = i; j < N - 1; j++) {
-                std::swap(array[j], array[j + 1]);
-            }
+        if (array[i] != element) {
+            tempArray[newSize++] = array[i];
         }
     }
+
+    delete[] array;
+
+    if (newSize < N) {
+        if (newSize == 0) {
+            array = nullptr;
+            delete[] tempArray;
+        } else {
+            array = new int[newSize];
+            for (int i = 0; i < newSize; i++) {
+                array[i] = tempArray[i];
+            }
+            delete[] tempArray;
+        }
+    } else {
+        array = tempArray;
+    }
+
+    N = newSize;
 }
