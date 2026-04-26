@@ -54,6 +54,7 @@ void task2() {
         cout << "В массиве нет отрицательных чисел";
         printOneDimensionArray(array, N);
     }
+    delete [] array;
 }
 
 
