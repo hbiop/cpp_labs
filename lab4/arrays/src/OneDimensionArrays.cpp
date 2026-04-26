@@ -2,50 +2,52 @@
 #include "../include/OneDimensionArrays.h"
 
 #include <iostream>
+#include <iomanip>
 
 #include "../../generators/include/RandomNumberGenerators.h"
 
-int *newOneDimensionArray(int N) {
-    return new int[N];
+int *NewOneDimensionArray(int array_size) {
+    return new int[array_size];
 }
 
-double *newOneDimensionArrayDouble(int N) {
-    return new double[N];
+double *NewOneDimensionArrayDouble(int array_size) {
+    return new double[array_size];
 }
 
-void fillOneDimensionArrayWithNumbers(int *array, int N, int min, int max) {
-    for (int i = 0; i < N; i++) {
-        array[i] = generateRandomNumber(min, max);
+void FillOneDimensionArrayWithNumbers(int *array, int array_size, int min, int max) {
+    for (int i = 0; i < array_size; i++) {
+        array[i] = GenerateRandomNumber(min, max);
     }
 }
 
-void fillOneDimensionArrayWithNumbersWithPointerArithmetic(int* arrayPtr, int N, int min, int max) {
-    int* end = arrayPtr + N;
-    for (int* p = arrayPtr; p < end; p++) {
-        *p = generateRandomNumber(min, max);
+void FillOneDimensionArrayWithNumbersWithPointerArithmetic(int* array_ptr, int array_size, int min, int max) {
+    int* end = array_ptr + array_size;
+    for (int* p = array_ptr; p < end; p++) {
+        *p = GenerateRandomNumber(min, max);
     }
 }
-void fillOneDimensionArrayWithNumbersDouble(double* array, int N, int min, int max) {
-    for (int i = 0; i < N; i++) {
-        array[i] = generateRandomNumber(min, max);
+void FillOneDimensionArrayWithNumbersDouble(double* array, int array_size, int min, int max) {
+    for (int i = 0; i < array_size; i++) {
+        array[i] = GenerateRandomNumber(min, max);
     }
 }
 
-void printOneDimensionArray(int *array, int N) {
-    for (int i = 0; i < N; i++) {
+void PrintOneDimensionArray(int *array, int array_size) {
+    for (int i = 0; i < array_size; i++) {
         std::cout << array[i] << " ";
     }
 }
 
-void printOneDimensionArray(double *array, int N) {
-    for (int i = 0; i < N; i++) {
-        std::cout << array[i] << " ";
+void PrintOneDimensionArray(double *array, int array_size) {
+    for (int i = 0; i < array_size; i++) {
+        std::cout << std::fixed << std::setprecision(2) << array[i] << " ";
     }
+    std::cout << std::endl;
 }
 
-double findMinElement(double *array, int N) {
+double FindMinElement(double *array, int array_size) {
     double min = array[0];
-    for (int i = 1; i < N; i++) {
+    for (int i = 1; i < array_size; i++) {
         if (array[i] < min) {
             min = array[i];
         }
@@ -53,48 +55,48 @@ double findMinElement(double *array, int N) {
     return min;
 }
 
-int findMaxNegativeNumber(int *array, int N) {
-    int maxNegative = array[0];
-    for (int i = 1; i < N; i++) {
-        if (maxNegative >= 0 && array[i] < 0) {
-            maxNegative = array[i];
+int FindMaxNegativeNumber(int *array, int array_size) {
+    int max_negative = array[0];
+    for (int i = 1; i < array_size; i++) {
+        if (max_negative >= 0 && array[i] < 0) {
+            max_negative = array[i];
         }
-        if (array[i] > maxNegative && array[i] < 0) {
-            maxNegative = array[i];
+        if (array[i] > max_negative && array[i] < 0) {
+            max_negative = array[i];
         }
     }
-    if (maxNegative >= 0) {
+    if (max_negative >= 0) {
         return 1;
     }
-    return maxNegative;
+    return max_negative;
 }
 
-void deleteElementFromArray(int* &array, int &N, int element) {
-    int* tempArray = new int[N];
-    int newSize = 0;
+void DeleteElementFromArray(int* &array, int &array_size, int element) {
+    int* temp_array = new int[array_size];
+    int new_size = 0;
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < array_size; i++) {
         if (array[i] != element) {
-            tempArray[newSize++] = array[i];
+            temp_array[new_size++] = array[i];
         }
     }
 
     delete[] array;
 
-    if (newSize < N) {
-        if (newSize == 0) {
+    if (new_size < array_size) {
+        if (new_size == 0) {
             array = nullptr;
-            delete[] tempArray;
+            delete[] temp_array;
         } else {
-            array = new int[newSize];
-            for (int i = 0; i < newSize; i++) {
-                array[i] = tempArray[i];
+            array = new int[new_size];
+            for (int i = 0; i < new_size; i++) {
+                array[i] = temp_array[i];
             }
-            delete[] tempArray;
+            delete[] temp_array;
         }
     } else {
-        array = tempArray;
+        array = temp_array;
     }
 
-    N = newSize;
+    array_size = new_size;
 }

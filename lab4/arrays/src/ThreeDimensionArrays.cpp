@@ -2,23 +2,23 @@
 #include "../include/ThreeDimensionArrays.h"
 #include "../include/TwoDimensionArrays.h"
 
-int ***newThreeDimensionArray(int L, int M, int N) {
-    auto array = new int**[L];
-    for (int i = 0; i < L; i++) {
-        array[i] = newTwoDimensionArray(M, N);
+int ***NewThreeDimensionArray(const int depth, const int rows, const int columns) {
+    const auto array = new int**[depth];
+    for (int i = 0; i < depth; i++) {
+        array[i] = NewTwoDimensionArray(rows, columns);
     }
     return array;
 }
 
-void deleteThreeDimensionArray(int*** array, int L, int M) {
-    for (int i = 0; i < L; i++) {
-        deleteTwoDimensionArray(array[i], M);
+void DeleteThreeDimensionArray(int*** array, const int depth, const int rows) {
+    for (int i = 0; i < depth; i++) {
+        DeleteTwoDimensionArray(array[i], rows);
     }
     delete [] array;
 }
 
-void fillThreeDimensionArrayWithNumbers(int ***array, int L, int M, int N, int min, int max) {
-    for (int i = 0; i < L; i++) {
-        fillTwoDimensionArrayWithNumbers(array[i], M, N, min, max);
+void FillThreeDimensionArrayWithNumbers(int ***array, const int depth, const int rows, const int columns, const int min, const int max) {
+    for (int i = 0; i < depth; i++) {
+        FillTwoDimensionArrayWithNumbers(array[i], rows, columns, min, max);
     }
 }

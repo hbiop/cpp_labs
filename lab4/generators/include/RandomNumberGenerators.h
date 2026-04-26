@@ -1,4 +1,4 @@
 ﻿#pragma once
 
-int generateRandomNumber(int min, int max);
-double generateRandomNumber(double min, double max);
+int GenerateRandomNumber(int min, int max);
+double GenerateRandomNumber(double min, double max);

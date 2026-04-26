@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <string>
 
-int **newTwoDimensionArray(int M, int N);
-double **newTwoDimensionArrayDouble(int M, int N);
-void deleteTwoDimensionArray(int** array, int M);
-void deleteTwoDimensionArray(double** array, int M);
-void fillTwoDimensionArrayWithNumbers(int** array, int M, int N, int min = 0, int max = 100);
-void fillTwoDimensionArrayWithNumbersDouble(double **array, int M, int N, int min = 0, int max = 100);
-void printTwoDimensionArray(int** array, int M, int N, std::string prefix = "");
-void printTwoDimensionArray(double** array, int M, int N, std::string prefix = "");
+int **NewTwoDimensionArray(int rows, int columns);
+double **NewTwoDimensionArrayDouble(int rows, int columns);
+void DeleteTwoDimensionArray(int** array, int rows);
+void DeleteTwoDimensionArray(double** array, int rows);
+void FillTwoDimensionArrayWithNumbers(int** array, int rows, int columns, int min = 0, int max = 100);
+void FillTwoDimensionArrayWithNumbersDouble(double **array, int rows, int columns, int min = 0, int max = 100);
+void PrintTwoDimensionArray(int** array, int rows, int columns, const std::string &prefix = "");
+void PrintTwoDimensionArray(double** array, int rows, int columns, const std::string &prefix = "");

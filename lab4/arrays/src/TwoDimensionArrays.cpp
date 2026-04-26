@@ -6,61 +6,61 @@
 
 #include "../include/OneDimensionArrays.h"
 
-int **newTwoDimensionArray(int M, int N) {
-    auto array = new int*[M];
-    for (int i = 0; i < M; i++) {
-        array[i] = newOneDimensionArray(N);
+int **NewTwoDimensionArray(const int rows, const int columns) {
+    auto array = new int*[rows];
+    for (int i = 0; i < rows; i++) {
+        array[i] = NewOneDimensionArray(columns);
     }
     return array;
 }
 
-double **newTwoDimensionArrayDouble(int M, int N) {
-    auto array = new double*[M];
-    for (int i = 0; i < M; i++) {
-        array[i] = newOneDimensionArrayDouble(N);
+double **NewTwoDimensionArrayDouble(const int rows, const int columns) {
+    auto array = new double*[rows];
+    for (int i = 0; i < rows; i++) {
+        array[i] = NewOneDimensionArrayDouble(columns);
     }
     return array;
 }
 
-void deleteTwoDimensionArray(int** array, int M) {
-    for (int i = 0; i < M; i++) {
+void DeleteTwoDimensionArray(int** array, const int rows) {
+    for (int i = 0; i < rows; i++) {
         delete [] array[i];
     }
     delete [] array;
 }
 
-void deleteTwoDimensionArray(double** array, int M) {
-    for (int i = 0; i < M; i++) {
+void DeleteTwoDimensionArray(double** array, const int rows) {
+    for (int i = 0; i < rows; i++) {
         delete [] array[i];
     }
     delete [] array;
 }
 
-void fillTwoDimensionArrayWithNumbers(int **array, int M, int N, int min, int max) {
-    for (int i = 0; i < M; i++) {
-        fillOneDimensionArrayWithNumbers(array[i], N, min, max);
+void FillTwoDimensionArrayWithNumbers(int **array, const int rows, const int columns, const int min, const int max) {
+    for (int i = 0; i < rows; i++) {
+        FillOneDimensionArrayWithNumbers(array[i], columns, min, max);
     }
 }
 
-void fillTwoDimensionArrayWithNumbersDouble(double **array, int M, int N, int min, int max) {
-    for (int i = 0; i < M; i++) {
-        fillOneDimensionArrayWithNumbersDouble(array[i], N, min, max);
+void FillTwoDimensionArrayWithNumbersDouble(double **array, const int rows, const int columns, const int min, const int max) {
+    for (int i = 0; i < rows; i++) {
+        FillOneDimensionArrayWithNumbersDouble(array[i], columns, min, max);
     }
 }
 
-void printTwoDimensionArray(int **array, int M, int N, std::string prefix) {
-    for (int i = 0; i < M; i++) {
+void PrintTwoDimensionArray(int **array, const int rows, const int columns, const std::string &prefix) {
+    for (int i = 0; i < rows; i++) {
         std::cout << prefix << " ";
-        printOneDimensionArray(array[i],N);
+        PrintOneDimensionArray(array[i],columns);
         std::cout << std::endl;
     }
 }
 
 
-void printTwoDimensionArray(double **array, int M, int N, std::string prefix) {
-    for (int i = 0; i < M; i++) {
+void PrintTwoDimensionArray(double **array, const int rows, const int columns, const std::string &prefix) {
+    for (int i = 0; i < rows; i++) {
         std::cout << prefix << " ";
-        printOneDimensionArray(array[i],N);
+        PrintOneDimensionArray(array[i],columns);
         std::cout << std::endl;
     }
 }

@@ -22,19 +22,19 @@ int main() {
         cin >> N;
         switch (N) {
             case 1:
-                task1WithPointerArithmetic();
+                TaskOneWithPointerArithmetic();
                 break;
             case 2:
-                task2();
+                TaskTwo();
                 break;
             case 3:
-                task3();
+                TaskThree();
                 break;
             case 4:
-                task4();
+                TaskFour();
                 break;
             case 5:
-                task5();
+                TaskFive();
                 break;
             case 0:
                 return 0;
