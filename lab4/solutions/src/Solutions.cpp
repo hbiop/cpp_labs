@@ -145,31 +145,31 @@ void TaskFour() {
 }
 
 void TaskFive() {
-    cout << "Задание 5. Трехмерный массив описывает школьный журнал одного класса. "
-            "Каждая страница журнала содержит оценки N учеников за М уроков по одному предмету "
-            "(в каждой строке – оценки одного ученика, в каждой колонке – оценки за один урок). "
-            "В журнале L страниц – по количеству изучаемых школьниками предметов. Пусть N=26, M=48, L=14. "
-            "Определить, есть ли в классе ученики, которые учатся без двоек. \n";
-    int columns, rows, depth;
-    cout << "Введите количество учеников" << endl;
-    cin >> columns;
-    cout << "Введите количество предметов" << endl;
-    cin >> rows;
-    cout << "Введите количество страниц" << endl;
-    cin >> depth;
-    const auto array = NewThreeDimensionArray(depth, rows, columns);
-    FillThreeDimensionArrayWithNumbers(array, depth, rows, columns, 2, 5);
-    for (int i = 0; i < depth; i++) {
-        for (int j = 0; j < rows; j++) {
-            for (int z = 0; z < columns; z++) {
-                if (array[i][j][z] == 2) {
-                    cout << "В классе есть ученики, которые учатся на двойки" << endl;
-                    DeleteThreeDimensionArray(array, depth, rows);
-                    return;
+    int n, m, l;
+    cout << "Учеников: "; cin >> n;
+    cout << "Уроков: "; cin >> m;
+    cout << "Предметов: "; cin >> l;
+    int*** journal = NewThreeDimensionArray(l, n, m);
+    FillThreeDimensionArrayWithNumbers(journal, l, n, m, 2, 5);
+
+    int good_students_count = 0;
+    for (int student = 0; student < n; student++) {
+        bool has_two = false;
+        for (int subj = 0; subj < l; subj++) {
+            for (int lesson = 0; lesson < m; lesson++) {
+                if (journal[subj][student][lesson] == 2) {
+                    has_two = true; break;
                 }
             }
+            if (has_two) break;
         }
+        if (!has_two) good_students_count++;
     }
-    cout << "В классе все ученики учатся хорошо" << endl;
-    DeleteThreeDimensionArray(array, depth, rows);
+
+    if (good_students_count > 0)
+        cout << "Найдено учеников без двоек: " << good_students_count << endl;
+    else
+        cout << "В этом классе у всех есть двойки." << endl;
+
+    DeleteThreeDimensionArray(journal, l, n);
 }
