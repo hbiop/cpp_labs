@@ -19,6 +19,12 @@ void fillOneDimensionArrayWithNumbers(int *array, int N, int min, int max) {
     }
 }
 
+void fillOneDimensionArrayWithNumbersWithPointerArithmetic(int* arrayPtr, int N, int min, int max) {
+    int* end = arrayPtr + N;
+    for (int* p = arrayPtr; p < end; p++) {
+        *p = generateRandomNumber(min, max);
+    }
+}
 void fillOneDimensionArrayWithNumbersDouble(double* array, int N, int min, int max) {
     for (int i = 0; i < N; i++) {
         array[i] = generateRandomNumber(min, max);

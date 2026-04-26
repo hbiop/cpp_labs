@@ -22,7 +22,7 @@ int main() {
         cin >> N;
         switch (N) {
             case 1:
-                task1();
+                task1WithPointerArithmetic();
                 break;
             case 2:
                 task2();

@@ -17,18 +17,43 @@ void task1() {
     int N;
     cout << "Введите размер массива: ";
     cin >> N;
+    bool found = false;
     auto array = newOneDimensionArray(N);
     fillOneDimensionArrayWithNumbers(array, N);
     for (int i = 0; i < N-1; i++) {
         if (array[i] == array[i+1]) {
-            cout << "В массиве есть пары соседних одинаковых элементов \n";
-            delete[] array;
-            return;
+            found = true;
+            break;
         }
     }
+    if (found) cout << "Есть пары одинаковых элементов\n";
+    else cout << "Пар нет\n";
     delete[] array;
-    cout << "В массиве есть нет пары соседних одинаковых элементов \n";
 }
+
+void task1WithPointerArithmetic() {
+    cout << "\n Задание 1 Определить, есть ли в целочисленном массиве М (15) пары соседних одинаковых элементов. \n";
+    int N;
+    cin >> N;
+    int* array = newOneDimensionArray(N);
+    fillOneDimensionArrayWithNumbersWithPointerArithmetic(array, N, 1, 10);
+
+    bool found = false;
+    int* end = array + N;
+
+    for (int* ptr = array; ptr < end - 1; ptr++) {
+        if (*ptr == *(ptr + 1)) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) cout << "Есть пары одинаковых элементов\n";
+    else cout << "Пар нет\n";
+
+    delete[] array;
+}
+
 
 void task2() {
     cout << "Найти наибольший отрицательный элемент одномерного массива и удалить его,"
