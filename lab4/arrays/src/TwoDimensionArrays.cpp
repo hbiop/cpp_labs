@@ -2,6 +2,7 @@
 
 #include "../include/TwoDimensionArrays.h"
 
+#include <iomanip>
 #include <iostream>
 
 #include "../include/OneDimensionArrays.h"
@@ -48,19 +49,19 @@ void FillTwoDimensionArrayWithNumbersDouble(double **array, const int rows, cons
     }
 }
 
-void PrintTwoDimensionArray(int **array, const int rows, const int columns, const std::string &prefix) {
-    for (int i = 0; i < rows; i++) {
-        std::cout << prefix << " ";
-        PrintOneDimensionArray(array[i],columns);
+void PrintTwoDimensionArray(double** array, int rows, int columns) {
+    for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows; i++) {
+            std::cout << std::fixed << std::setprecision(2) << std::setw(8) << array[i][j];
+        }
         std::cout << std::endl;
     }
 }
-
-
-void PrintTwoDimensionArray(double **array, const int rows, const int columns, const std::string &prefix) {
-    for (int i = 0; i < rows; i++) {
-        std::cout << prefix << " ";
-        PrintOneDimensionArray(array[i],columns);
+void PrintTwoDimensionArray(int** array, int rows, int columns) {
+    for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rows; i++) {
+            std::cout << std::fixed << std::setprecision(2) << std::setw(8) << array[i][j];
+        }
         std::cout << std::endl;
     }
 }

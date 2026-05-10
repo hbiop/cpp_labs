@@ -12,7 +12,8 @@
 
 using namespace std;
 
-void TaskOne() {
+
+void lab4::TaskOne() {
     cout << "\n Задание 1 Определить, есть ли в целочисленном массиве М (15) пары соседних одинаковых элементов. \n";
     int array_size;
     cout << "Введите размер массива: ";
@@ -31,7 +32,7 @@ void TaskOne() {
     delete[] array;
 }
 
-void TaskOneWithPointerArithmetic() {
+void lab4::TaskOneWithPointerArithmetic() {
     cout << "\n Задание 1 Определить, есть ли в целочисленном массиве М (15) пары соседних одинаковых элементов. \n";
     int array_size;
     cin >> array_size;
@@ -56,72 +57,65 @@ void TaskOneWithPointerArithmetic() {
 }
 
 
-void TaskTwo() {
-    cout << "Найти наибольший отрицательный элемент одномерного массива и удалить его,"
-            " сдвинув оставшиеся элементы к началу массива."
-            "Если в массиве несколько элементов имеют наибольшее отрицательное значение, "
-            "удалить их все. Массив, все элементы которого отрицательны и равны между собой,"
-            " признается некорректным. \n";
-    int array_size;
-    cout << "Введите количество элементов в массиве" << endl;
-    cin >> array_size;
-    auto array = NewOneDimensionArray(array_size);
-    FillOneDimensionArrayWithNumbers(array, array_size, -100, 100);
-    int max_negative = FindMaxNegativeNumber(array, array_size);
-    cout << "Массив до удаления элементов";
-    PrintOneDimensionArray(array, array_size);
-    if (max_negative < 0) {
-        cout << "Максимальный отрицательный элемент в массиве" << max_negative <<endl;
-        DeleteElementFromArray(array, array_size, max_negative);
-        cout << "Массив после удаления элементов";
-        PrintOneDimensionArray(array, array_size);
-    }
-    else {
-        cout << "В массиве нет отрицательных чисел";
-        PrintOneDimensionArray(array, array_size);
-    }
-    delete [] array;
-}
+void lab4::TaskTwo() {
+    cout << "\n--- Задание 2: Удаление макс. отрицательного ---\n";
+    int size;
+    cout << "Введите размер: "; cin >> size;
+    int* array = NewOneDimensionArray(size);
+    FillOneDimensionArrayWithNumbers(array, size, -10, 10);
 
+    cout << "Исходный массив: "; PrintOneDimensionArray(array, size); cout << endl;
 
-void TaskThree() {
-    cout << " Дана вещественная матрица D (7х9). "
-            "Упорядочить (переставить) строки матрицы по неубыванию наименьших "
-            "элементов строк. Если в строке все элементы имеют одно значение, "
-            "считать его наименьшим. \n";
-    int columns, rows;
-    cout << "Введите количество строк в матрице" << endl;
-    cin >> columns;
-    cout << "Введите количество столбцов в матрице" << endl;
-    cin >> rows;
-    const auto array = NewTwoDimensionArrayDouble(rows, columns);
-    const auto array_with_min_elements = NewOneDimensionArrayDouble(rows);
-    FillTwoDimensionArrayWithNumbersDouble(array, rows, columns);
-    std::cout << "Вывод не отсортированного массива: \n";
-    PrintTwoDimensionArray(array, rows, columns);
-    for (int i = 0; i < rows; i++) {
-        array_with_min_elements[i] = FindMinElement(array[i], columns);
-    }
-    for (int i = 0; i < rows - 1; i++) {
-
-        bool swapped = false;
-
-        for (int j = 0; j < rows - i - 1; j++) {
-            if (array_with_min_elements[j] > array_with_min_elements[j + 1]) {
-                std::swap(array_with_min_elements[j], array_with_min_elements[j + 1]);
-                std::swap(array[j], array[j + 1]);
-                swapped = true;
+    int max_neg = 0;
+    bool found = false;
+    for(int i = 0; i < size; i++) {
+        if (array[i] < 0) {
+            if (!found || array[i] > max_neg) {
+                max_neg = array[i];
+                found = true;
             }
         }
-
-        if (!swapped) break;
     }
-    std::cout << "Вывод отсортированного массива: \n";
-    PrintTwoDimensionArray(array, rows, columns);
-    DeleteTwoDimensionArray(array, rows);
+
+    if (found) {
+        cout << "Удаляем элемент: " << max_neg << endl;
+        DeleteElementFromArray(array, size, max_neg); // Функция из моего прошлого сообщения
+        cout << "Результат: "; PrintOneDimensionArray(array, size); cout << endl;
+    } else {
+        cout << "Отрицательных элементов нет." << endl;
+    }
+    delete[] array;
 }
 
-void TaskFour() {
+
+void lab4::TaskThree() {
+    int r, c;
+    cout << "Строк: "; cin >> r;
+    cout << "Столбцов: "; cin >> c;
+    double** D = NewTwoDimensionArrayDouble(r, c);
+    double* min_elements = NewOneDimensionArrayDouble(r);
+    FillTwoDimensionArrayWithNumbersDouble(D, r, c, -50, 50);
+
+    for (int i = 0; i < r; i++)
+        min_elements[i] = FindMinElement(D[i], c);
+
+    for (int i = 0; i < r - 1; i++) {
+        for (int j = 0; j < r - i - 1; j++) {
+            if (min_elements[j] > min_elements[j + 1]) {
+                swap(min_elements[j], min_elements[j+1]);
+                swap(D[j], D[j+1]);
+            }
+        }
+    }
+
+    cout << "Матрица:\n";
+    PrintTwoDimensionArray(D, r, c);
+
+    delete[] min_elements;
+    DeleteTwoDimensionArray(D, r);
+}
+
+void lab4::TaskFour() {
     cout << "Задание 4. Вычислить среднее арифметическое значение элементов "
             "квадратной матрицы, лежащих слева от главной диагонали. \n";
     int rows;
@@ -144,7 +138,7 @@ void TaskFour() {
             "квадратной матрицы, лежащих слева от главной диагонали " << (elementsSum * 0.1)/elementCounter << endl;
 }
 
-void TaskFive() {
+void lab4::TaskFive() {
     int n, m, l;
     cout << "Учеников: "; cin >> n;
     cout << "Уроков: "; cin >> m;

@@ -1,9 +1,10 @@
 ﻿#pragma once
 
-
-void TaskOne();
-void TaskOneWithPointerArithmetic();
-void TaskTwo();
-void TaskThree();
-void TaskFour();
-void TaskFive();
+namespace lab4 {
+    void TaskOne();
+    void TaskOneWithPointerArithmetic();
+    void TaskTwo();
+    void TaskThree();
+    void TaskFour();
+    void TaskFive();
+}
