@@ -1,14 +1,14 @@
 ﻿#include <iostream>
 #include <ctime>
-#include <windows.h>
+//#include <windows.h>
 #include "main_lab_4.h"
 #include "solutions/include/Solutions.h"
 
 using namespace std;
 using namespace lab4;
 int main_lab_4() {
-    SetConsoleCP(CP_UTF8);
-    SetConsoleOutputCP(CP_UTF8);
+    //SetConsoleCP(CP_UTF8);
+    //SetConsoleOutputCP(CP_UTF8);
     setlocale(LC_ALL, "ru");
     std::srand(time(nullptr));
     while (true) {

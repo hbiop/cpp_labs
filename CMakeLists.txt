@@ -19,4 +19,5 @@ add_executable(cpp_labs main.cpp
         lab5/solutions/solutions.cpp
         lab5/solutions/solutions.h
         lab5/utils/string_utils/c_string_utils.cpp
-        lab5/utils/string_utils/c_string_utils.h)
+        lab5/utils/string_utils/c_string_utils.h
+        main.cpp)

@@ -19,7 +19,7 @@ void lab5::task_one() {
 
     const char* delimiters = " ,";
     char* next_ptr = nullptr;
-    char* word = strtok_s(input_string, delimiters, &next_ptr);
+    char* word = strtok_r(input_string, delimiters, &next_ptr);
 
     while (word != nullptr) {
         bool startsWithA = false;
@@ -35,7 +35,7 @@ void lab5::task_one() {
             }
             result_string[result_idx++] = ' ';
         }
-        word = strtok_s(nullptr, delimiters, &next_ptr);
+        word = strtok_r(nullptr, delimiters, &next_ptr);
     }
 
     if (result_idx > 0) {
@@ -51,9 +51,42 @@ void lab5::task_one() {
     delete[] result_string;
 }
 
+bool is_russian_vowel(const char* current_char) {
+    const char* vowels = "аеёиоуыэюяАЕЁИОУЫЭЮЯ";
+
+    char temp_letter[3];
+    temp_letter[0] = current_char[0];
+    temp_letter[1] = current_char[1];
+    temp_letter[2] = '\0';
+
+    return strstr(vowels, temp_letter) != nullptr;
+}
 
 void lab5::task_two() {
+    char str[] = "Привет мир";
+    int write = 0;
+    int read = 0;
 
+    while (str[read] != '\0') {
+        if (str[read] < 0) {
+            if (is_russian_vowel(&str[read])) {
+                read += 2;
+            }
+            else {
+                str[write] = str[read];
+                str[write + 1] = str[read + 1];
+                write += 2;
+                read += 2;
+            }
+        }
+        else {
+            str[write] = str[read];
+            write += 1;
+            read += 1;
+        }
+    }
+    str[write] = '\0';
+    std::cout << str << std::endl;
 }
 
 void lab5::task_three() {
